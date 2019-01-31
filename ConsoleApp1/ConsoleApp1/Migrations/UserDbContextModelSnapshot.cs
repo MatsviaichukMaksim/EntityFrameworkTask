@@ -27,7 +27,7 @@ namespace ConsoleApp1.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<string>("Date");
+                    b.Property<DateTime>("Date");
 
                     b.Property<int?>("GetterId");
 
@@ -71,7 +71,7 @@ namespace ConsoleApp1.Migrations
 
                     b.Property<int?>("AwardId");
 
-                    b.Property<string>("Date");
+                    b.Property<DateTime>("Date");
 
                     b.Property<string>("Text");
 
