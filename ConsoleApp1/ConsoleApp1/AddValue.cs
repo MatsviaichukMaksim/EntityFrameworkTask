@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ConsoleApp1
 {
-    public class AddValue:IAddValue
+    public class AddValue:User,IAddValue
     {
         public void AddUserTable()
         {

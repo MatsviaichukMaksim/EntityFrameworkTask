@@ -10,6 +10,6 @@ namespace ConsoleApp1.Models
         public string Text { get; set; }
         public Award Award { get; set; }
         public User User { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -9,6 +9,6 @@ namespace ConsoleApp1.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public int Points { get; set; }
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }
