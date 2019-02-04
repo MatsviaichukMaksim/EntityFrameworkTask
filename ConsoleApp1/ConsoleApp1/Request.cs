@@ -19,7 +19,7 @@ namespace ConsoleApp1
             using (UserDbContext db = new UserDbContext())
             {
                 var answer = db.Awards
-                    .Where(a => a.Category.Title.Contains(titleOfCategory, StringComparison.OrdinalIgnoreCase));
+                    .Where(a => a.Category.Title.Contains(titleOfCategory, StringComparison.OrdinalIgnoreCase)); //Include??
                 if (answer != null)
                 {
                     foreach (var award in answer)
@@ -29,7 +29,7 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    Console.WriteLine("Wasn't found1");
+                    Console.WriteLine("Wasn't found!");
                 }
             }
         }
@@ -46,17 +46,37 @@ namespace ConsoleApp1
             using (UserDbContext db = new UserDbContext())
             {
                 GetUserName();
-                var answer = db.Awards.Where(u => u.Giver.FirstName == _firstName && u.Giver.LastName == _lastName);
-                foreach(var award in answer)
+                var answer = db.Awards
+                    .Where(u => u.Giver.FirstName == _firstName && u.Giver.LastName == _lastName);
+                if (answer != null)
                 {
-                    Console.WriteLine($"Award:{award.Title}");
+                    foreach (var award in answer)
+                    {
+                        Console.WriteLine($"Award:{award.Title}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wasn't found!");
                 }
             }
         }
         public void CalculateAveragePointsGivenByUser()
         {
-            GetUserName();
-            ////
+            using (UserDbContext db = new UserDbContext())
+            {
+                GetUserName();
+                var answer = db.Awards
+                    .Where(u => u.Giver.FirstName == _firstName && u.Giver.LastName == _lastName).Average(u => u.Points);
+                if (answer != null)
+                {
+                        Console.WriteLine($"Points: {answer}");  // for every person??
+                }
+                else
+                {
+                    Console.WriteLine("Wasn't found!");
+                }
+            }
 
         }
         public void MostPopularAward()
@@ -65,7 +85,14 @@ namespace ConsoleApp1
             {
                 var answer = db.Awards.GroupBy(q => q.Category).OrderByDescending(ct => ct.Count()).Take(1)
                     .Select(a => a.Key).FirstOrDefault();
-                Console.WriteLine(answer.Title); //// or response
+                if (answer != null)
+                {
+                    Console.WriteLine($"Title: { answer.Title}");
+                }
+                else
+                {
+                    Console.WriteLine("Wasn't found!");
+                }
             }
         }
         private void GetUserName()

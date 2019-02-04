@@ -25,7 +25,6 @@ namespace ConsoleApp1
                 l.AwardId,
                 l.UserId
             });
-            base.OnModelCreating(modelBuilder);
         }
     }
 }
