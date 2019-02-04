@@ -25,7 +25,8 @@ namespace ConsoleApp1
             {
                 foreach (Award award in db.Awards)
                 {
-                    Console.WriteLine($"{award.Id.ToString()}, {award.Title}, {award.Giver}, {award.Getter}, {award.Date.ToString()}, {award.Points}");//GiverId,GetterId
+                    Console.WriteLine($"Id:{award.Id.ToString()}, Title: {award.Title}, Giver: {award.Giver}, Getter: {award.Getter}, Date:{award.Date.ToString()}, Points: {award.Points}");//GiverId,GetterId???
+                    //award.GiverId.FirstName
                 }
             }
         }
@@ -35,7 +36,7 @@ namespace ConsoleApp1
             {
                 foreach (Comment comment in db.Comments)
                 {
-                    Console.WriteLine($"{comment.Id.ToString()}, {comment.Text}, {comment.AwardId}, {comment.UserId}, {comment.Date.ToString()}");
+                    Console.WriteLine($"Id: {comment.Id.ToString()}, Text: {comment.Text}, AwardId: {comment.AwardId}, UserId: {comment.UserId}, Date: {comment.Date.ToString()}");
                 }
             }
         }
@@ -45,7 +46,7 @@ namespace ConsoleApp1
             {
                 foreach (Category category in db.Categories)
                 {
-                    Console.WriteLine($"{category.Id.ToString()}, {category.Title}, {category.Points}, {category.Date.ToString()}");
+                    Console.WriteLine($"Id: {category.Id.ToString()}, Title: {category.Title}, Category: {category.Points}, Date: {category.Date.ToString()}");
                 }
             }
         }
@@ -55,7 +56,7 @@ namespace ConsoleApp1
             {
                 foreach (Like like in db.Likes)
                 {
-                    Console.WriteLine($"{like.Date.ToString()}, {like.Award}, {like.User}");//AwardId,UserId
+                    Console.WriteLine($"Date: {like.Date.ToString()}, AwardId:{like.AwardId}, UserId:{like.UserId}");//AwardId,UserId
                 }
             }
         }

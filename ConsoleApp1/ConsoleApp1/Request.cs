@@ -9,42 +9,72 @@ namespace ConsoleApp1
 {
     public class Request : IRequest
     {
+        private string _firstName = string.Empty;
+        private string _lastName = string.Empty;
+
         public void SearchAwards()
         {
             Console.WriteLine("Enter the name of category: ");
             string titleOfCategory = Console.ReadLine();
             using (UserDbContext db = new UserDbContext())
             {
-                var response = db.Awards
-                    .Where(a => a.Category.Title.Contains(titleOfCategory, StringComparison.OrdinalIgnoreCase))
-                    .Include(a => a.AgiverId).Include(a => a.AgetterId)
-                    .Include(a => a.Category);
-                foreach (var award in response)
+                var answer = db.Awards
+                    .Where(a => a.Category.Title.Contains(titleOfCategory, StringComparison.OrdinalIgnoreCase));
+                if (answer != null)
                 {
-                    Console.WriteLine(award.Title);
+                    foreach (var award in answer)
+                    {
+                        Console.WriteLine($"Award: {award.Title}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wasn't found1");
                 }
             }
         }
         public void CalculateAveragePoints()
         {
-
+            using (UserDbContext db = new UserDbContext())
+            {
+                var answer = db.Awards.Average(a => a.Points);
+                Console.WriteLine($"Average points by Award:{answer}");
+            }
         }
         public void SearchAwardsByGiver()
         {
-
+            using (UserDbContext db = new UserDbContext())
+            {
+                GetUserName();
+                var answer = db.Awards.Where(u => u.Giver.FirstName == _firstName && u.Giver.LastName == _lastName);
+                foreach(var award in answer)
+                {
+                    Console.WriteLine($"Award:{award.Title}");
+                }
+            }
         }
         public void CalculateAveragePointsGivenByUser()
         {
+            GetUserName();
+            ////
 
         }
         public void MostPopularAward()
         {
             using (UserDbContext db = new UserDbContext())
             {
-                var response = db.Awards.GroupBy(q => q.Category).OrderByDescending(ct => ct.Count()).Take(1)
+                var answer = db.Awards.GroupBy(q => q.Category).OrderByDescending(ct => ct.Count()).Take(1)
                     .Select(a => a.Key).FirstOrDefault();
-                Console.WriteLine(response.Title); //// or response
+                Console.WriteLine(answer.Title); //// or response
             }
+        }
+        private void GetUserName()
+        {
+            Console.WriteLine("Enter First Name:");
+            _firstName = Console.ReadLine();
+            Console.WriteLine("Enter Last Name:");
+            _lastName = Console.ReadLine();
+
         }
     }
 }

@@ -10,20 +10,28 @@ namespace ConsoleApp1
             //information.GetTableNameAndAction();
             //Action action = new Action();
             //action.LaunchAction(information.ActionUser, information.TableName);
-            while (true)
-            {
-                Information information = new Information();
-                information.GetTableNameAndAction();
-                Action action = new Action();
-                if (information.Answer == "1")
+           
+                while (true)
                 {
-                    action.LaunchAction(information.ActionUser, information.TableName);
-                }
-                else if (information.Answer == "2")
-                {
-                    action.Request(information.RequestName);
-                }
-            }
+                    try
+                    {
+                        Information information = new Information();
+                        information.GetTableNameAndAction();
+                        Action action = new Action();
+                        if (information.Answer == "1")
+                        {
+                            action.LaunchAction(information.ActionUser, information.TableName);
+                        }
+                        else if (information.Answer == "2")
+                        {
+                            action.Request(information.RequestName);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Error:{ex.Message}");
+                    }
+                }      
         }
     }
 }

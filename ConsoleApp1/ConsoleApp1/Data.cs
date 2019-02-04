@@ -162,7 +162,7 @@ namespace ConsoleApp1
         //{
         //    using (UserDbContext db = new UserDbContext<T>())
         //    {
-        //        var obj = db.Users.Find(_id);
+        //        var obj = db.Users.Find(_id); //Users?
         //        if (obj != null)
         //        {
         //            GetData(obj);

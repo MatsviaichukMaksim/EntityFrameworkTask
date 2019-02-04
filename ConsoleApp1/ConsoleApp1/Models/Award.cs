@@ -13,9 +13,6 @@ namespace ConsoleApp1.Models
         public int Points { get; set; }
         public int CategoryId { get; set; }
         public string Title { get; set; }
-        //public DateTime NewDate { get; set; }
-        //public List<Like> Likes { get; set; }
-        //public List<Comment> Comments { get; set; }
         public Category Category { get; set; }
         public User Giver { get; set; }
         public User Getter { get; set; }
