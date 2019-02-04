@@ -8,8 +8,10 @@ namespace ConsoleApp1.Models
     {
         public int Id { get; set; }
         public string Text { get; set; }
+        public int AwardId { get; set; } //
+        public int UserId { get; set; } //
+        public DateTime Date { get; set; }
         public Award Award { get; set; }
         public User User { get; set; }
-        public DateTime Date { get; set; }
     }
 }

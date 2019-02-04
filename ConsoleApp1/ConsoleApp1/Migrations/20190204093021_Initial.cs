@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ConsoleApp1.Migrations
 {
-    public partial class NewTables : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +16,7 @@ namespace ConsoleApp1.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Title = table.Column<string>(nullable: true),
                     Points = table.Column<int>(nullable: false),
-                    Date = table.Column<string>(nullable: true)
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -44,11 +45,14 @@ namespace ConsoleApp1.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    GiverId = table.Column<int>(nullable: true),
-                    GetterId = table.Column<int>(nullable: true),
-                    Date = table.Column<string>(nullable: true),
+                    AgiverId = table.Column<int>(nullable: false),
+                    AgetterId = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
                     Points = table.Column<int>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    GiverId = table.Column<int>(nullable: true),
+                    GetterId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,9 +84,9 @@ namespace ConsoleApp1.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: true),
-                    AwardId = table.Column<int>(nullable: true),
-                    UserId = table.Column<int>(nullable: true),
-                    Date = table.Column<string>(nullable: true)
+                    AwardId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -92,13 +96,13 @@ namespace ConsoleApp1.Migrations
                         column: x => x.AwardId,
                         principalTable: "Awards",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -107,7 +111,7 @@ namespace ConsoleApp1.Migrations
                 {
                     AwardId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
-                    Date = table.Column<string>(nullable: true)
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

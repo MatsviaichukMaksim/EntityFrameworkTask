@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConsoleApp1.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20190130094156_NewTables")]
-    partial class NewTables
+    [Migration("20190204093021_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,15 +27,21 @@ namespace ConsoleApp1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AgetterId");
+
+                    b.Property<int>("AgiverId");
+
                     b.Property<int>("CategoryId");
 
-                    b.Property<string>("Date");
+                    b.Property<DateTime>("Date");
 
                     b.Property<int?>("GetterId");
 
                     b.Property<int?>("GiverId");
 
                     b.Property<int>("Points");
+
+                    b.Property<string>("Title");
 
                     b.HasKey("Id");
 
@@ -54,7 +60,7 @@ namespace ConsoleApp1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Date");
+                    b.Property<DateTime>("Date");
 
                     b.Property<int>("Points");
 
@@ -71,13 +77,13 @@ namespace ConsoleApp1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AwardId");
+                    b.Property<int>("AwardId");
 
-                    b.Property<string>("Date");
+                    b.Property<DateTime>("Date");
 
                     b.Property<string>("Text");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -94,7 +100,7 @@ namespace ConsoleApp1.Migrations
 
                     b.Property<int>("UserId");
 
-                    b.Property<string>("Date");
+                    b.Property<DateTime>("Date");
 
                     b.HasKey("AwardId", "UserId");
 
@@ -142,11 +148,13 @@ namespace ConsoleApp1.Migrations
                 {
                     b.HasOne("ConsoleApp1.Models.Award", "Award")
                         .WithMany()
-                        .HasForeignKey("AwardId");
+                        .HasForeignKey("AwardId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ConsoleApp1.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ConsoleApp1.Models.Like", b =>

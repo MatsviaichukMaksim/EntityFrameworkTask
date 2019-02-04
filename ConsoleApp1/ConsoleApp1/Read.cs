@@ -1,16 +1,16 @@
-﻿using ConsoleApp1.Models;
+﻿using ConsoleApp1.Interfaces;
+using ConsoleApp1.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ConsoleApp1
 {
-    public class Read:IRead
+    public class Read : IRead
     {
-       
+
         public void ReadUserTable()
         {
-            // Извлечь всех заказчиков и отобразить их имена в консоли
             using (UserDbContext db = new UserDbContext())
             {
                 foreach (User user in db.Users)
@@ -25,7 +25,7 @@ namespace ConsoleApp1
             {
                 foreach (Award award in db.Awards)
                 {
-                    Console.WriteLine(award.Id.ToString(), award.Giver, award.Getter, award.Date, award.Points);
+                    Console.WriteLine($"{award.Id.ToString()}, {award.Title}, {award.Giver}, {award.Getter}, {award.Date.ToString()}, {award.Points}");//GiverId,GetterId
                 }
             }
         }
@@ -35,7 +35,7 @@ namespace ConsoleApp1
             {
                 foreach (Comment comment in db.Comments)
                 {
-                    Console.WriteLine(comment.Id.ToString(), comment.Text, comment.Award, comment.User, comment.Date);
+                    Console.WriteLine($"{comment.Id.ToString()}, {comment.Text}, {comment.AwardId}, {comment.UserId}, {comment.Date.ToString()}");
                 }
             }
         }
@@ -45,7 +45,7 @@ namespace ConsoleApp1
             {
                 foreach (Category category in db.Categories)
                 {
-                    Console.WriteLine(category.Id.ToString(), category.Title, category.Points, category.Date);
+                    Console.WriteLine($"{category.Id.ToString()}, {category.Title}, {category.Points}, {category.Date.ToString()}");
                 }
             }
         }
@@ -55,7 +55,7 @@ namespace ConsoleApp1
             {
                 foreach (Like like in db.Likes)
                 {
-                    Console.WriteLine(like.Date);
+                    Console.WriteLine($"{like.Date.ToString()}, {like.Award}, {like.User}");//AwardId,UserId
                 }
             }
         }

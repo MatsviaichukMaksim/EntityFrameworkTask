@@ -1,23 +1,22 @@
 ﻿using ConsoleApp1.Interfaces;
-using ConsoleApp1.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ConsoleApp1
 {
-    public class Update : IUpdate
+    public class Delete : IDelete
     {
-        private Data data = new Data();
         private int _id = Data.GetUserId();
-        public void UpdateUserTable()
+        public void DeleteUserTable()
         {
             using (UserDbContext db = new UserDbContext())
             {
                 var user = db.Users.Find(_id);
                 if (user != null)
                 {
-                    data.GetData(user);
+                    db.Users.Remove(user);
                 }
                 else
                 {
@@ -26,14 +25,14 @@ namespace ConsoleApp1
                 db.SaveChanges();
             }
         }
-        public void UpdateAwardTable()
+        public void DeleteAwardTable()
         {
             using (UserDbContext db = new UserDbContext())
             {
                 var award = db.Awards.Find(_id);
                 if (award != null)
                 {
-                    data.GetData(award);
+                    db.Awards.Remove(award);
                 }
                 else
                 {
@@ -42,14 +41,14 @@ namespace ConsoleApp1
                 db.SaveChanges();
             }
         }
-        public void UpdateCommentTable()
+        public void DeleteCommentTable()
         {
             using (UserDbContext db = new UserDbContext())
             {
                 var comment = db.Comments.Find(_id);
                 if (comment != null)
                 {
-                    data.GetData(comment);
+                    db.Comments.Remove(comment);
                 }
                 else
                 {
@@ -58,14 +57,14 @@ namespace ConsoleApp1
                 db.SaveChanges();
             }
         }
-        public void UpdateCategoryTable()
+        public void DeleteCategoryTable()
         {
             using (UserDbContext db = new UserDbContext())
             {
                 var category = db.Categories.Find(_id);
                 if (category != null)
                 {
-                    data.GetData(category);
+                    db.Categories.Remove(category);
                 }
                 else
                 {
@@ -74,14 +73,14 @@ namespace ConsoleApp1
                 db.SaveChanges();
             }
         }
-        public void UpdateLikeTable()
+        public void DeleteLikeTable()
         {
             using (UserDbContext db = new UserDbContext())
             {
                 var like = db.Likes.Find(_id);
                 if (like != null)
                 {
-                    data.GetData(like);
+                    db.Likes.Remove(like);
                 }
                 else
                 {
@@ -90,16 +89,5 @@ namespace ConsoleApp1
                 db.SaveChanges();
             }
         }
-        //private void GetDataById<T>(T obj) where T :class
-        //{
-        //    if (obj != null)
-        //    {
-        //        data.GetData(obj);
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Was entered the wrong id!");
-        //    }
-        //}
     }
 }
